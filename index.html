@@ -30,7 +30,6 @@
       cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='28'%3E💔%3C/text%3E%3C/svg%3E") 16 16, auto;
     }
 
-    /* Chaotic background */
     body::before {
       content: '';
       position: fixed;
@@ -43,7 +42,6 @@
       z-index: 0;
     }
 
-    /* Floating emoji background */
     .bg-emojis {
       position: fixed;
       inset: 0;
@@ -66,7 +64,6 @@
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    /* ── HEADER ── */
     header {
       position: relative;
       z-index: 10;
@@ -79,11 +76,7 @@
       background: rgba(13,13,13,0.95);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .logo { display: flex; align-items: center; gap: 0.5rem; }
 
     .logo-icon {
       font-size: 2rem;
@@ -118,7 +111,6 @@
       border-radius: 3px;
     }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       z-index: 5;
@@ -161,7 +153,6 @@
       line-height: 1.7;
     }
 
-    /* ── EXAMPLES TICKER ── */
     .examples-bar {
       position: relative;
       z-index: 5;
@@ -187,7 +178,6 @@
 
     .example-item span { opacity: 0.6; }
 
-    /* ── MAIN CARD ── */
     .main-wrap {
       position: relative;
       z-index: 5;
@@ -206,7 +196,6 @@
       box-shadow: 8px 8px 0 var(--pink), 16px 16px 0 rgba(255,45,120,0.2);
     }
 
-    /* Torn paper top effect */
     .card::before {
       content: '💔 EVIDENCE SUBMITTED 💔';
       position: absolute;
@@ -223,7 +212,6 @@
       white-space: nowrap;
     }
 
-    /* ── LABEL ── */
     .field-label {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
@@ -236,7 +224,6 @@
       gap: 0.5rem;
     }
 
-    /* ── TEXTAREA ── */
     .ex-input {
       width: 100%;
       min-height: 130px;
@@ -254,13 +241,11 @@
     }
 
     .ex-input::placeholder { color: #444; font-style: italic; }
-
     .ex-input:focus {
       border-color: var(--pink);
       box-shadow: 0 0 0 3px rgba(255,45,120,0.15);
     }
 
-    /* ── CHAR COUNTER ── */
     .char-hint {
       font-family: 'Space Mono', monospace;
       font-size: 0.6rem;
@@ -269,7 +254,6 @@
       margin-top: 0.4rem;
     }
 
-    /* ── DIVIDER ── */
     .chaos-divider {
       text-align: center;
       margin: 1.5rem 0;
@@ -278,7 +262,6 @@
       opacity: 0.3;
     }
 
-    /* ── WHO SENT IT ── */
     .who-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -311,7 +294,6 @@
 
     .who-emoji { display: block; font-size: 1.4rem; margin-bottom: 0.2rem; }
 
-    /* ── TRANSLATE BUTTON ── */
     .btn-translate {
       width: 100%;
       margin-top: 1.8rem;
@@ -333,16 +315,8 @@
       gap: 0.5rem;
     }
 
-    .btn-translate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 0 #AA1D52;
-    }
-
-    .btn-translate:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 #AA1D52;
-    }
-
+    .btn-translate:hover  { transform: translateY(-2px); box-shadow: 0 8px 0 #AA1D52; }
+    .btn-translate:active { transform: translateY(4px);  box-shadow: 0 2px 0 #AA1D52; }
     .btn-translate.loading .btn-text { opacity: 0; }
     .btn-translate.loading .spinner  { display: flex; }
 
@@ -363,7 +337,6 @@
     .spinner span:nth-child(2) { animation-delay: 0.1s; }
     .spinner span:nth-child(3) { animation-delay: 0.2s; }
 
-    /* ── OUTPUT ── */
     .output-section {
       display: none;
       margin-top: 2rem;
@@ -440,7 +413,6 @@
       min-height: 2rem;
     }
 
-    /* Pain meter */
     .pain-meter {
       margin-top: 1.2rem;
       padding-top: 1rem;
@@ -480,7 +452,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* Output actions */
     .output-actions {
       display: flex;
       gap: 0.6rem;
@@ -520,7 +491,6 @@
 
     .btn-again:hover { border-color: var(--pink); color: var(--pink); }
 
-    /* ── COUNTER ── */
     .counter-bar {
       position: relative;
       z-index: 5;
@@ -551,7 +521,6 @@
       margin-top: 0.2rem;
     }
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 5;
@@ -565,7 +534,6 @@
 
     footer span { color: var(--pink); }
 
-    /* ── ANIMATIONS ── */
     @keyframes slideDown { from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);} }
     @keyframes fadeUp    { from{opacity:0;transform:translateY(20px); }to{opacity:1;transform:translateY(0);} }
     @keyframes ticker    { from{transform:translateX(0);}to{transform:translateX(-50%);} }
@@ -574,19 +542,17 @@
     @keyframes wiggle    { 0%,100%{transform:rotate(0);}25%{transform:rotate(-3deg);}75%{transform:rotate(3deg);} }
 
     @media (max-width: 600px) {
-      .who-grid  { grid-template-columns: repeat(2,1fr); }
+      .who-grid    { grid-template-columns: repeat(2,1fr); }
       .counter-bar { gap: 2rem; }
-      header { padding: 1rem 1.2rem; }
-      .card  { padding: 1.5rem; }
+      header       { padding: 1rem 1.2rem; }
+      .card        { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating emojis -->
   <div class="bg-emojis" id="bgEmojis"></div>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">
       <span class="logo-icon">💔</span>
@@ -597,7 +563,6 @@
     <span class="header-tag">BRUTALLY HONEST MODE ™</span>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-sticker">🚨 NO SUGARCOATING 🚨</div>
     <h1>
@@ -607,7 +572,6 @@
     <p class="hero-sub">Paste what your ex said. We'll translate the BS into brutal, unfiltered truth. You deserve to know. 😤</p>
   </section>
 
-  <!-- TICKER -->
   <div class="examples-bar">
     <div class="examples-inner">
       <span class="example-item">"I need space" <span>→</span> 💀 I'm already moving on</span>
@@ -623,7 +587,6 @@
     </div>
   </div>
 
-  <!-- COUNTER -->
   <div class="counter-bar">
     <div class="counter-item">
       <div class="counter-num" id="translationCount">2,847</div>
@@ -639,11 +602,9 @@
     </div>
   </div>
 
-  <!-- MAIN CARD -->
   <div class="main-wrap">
     <div class="card">
 
-      <!-- Input -->
       <div class="field-label">📱 Paste what they said:</div>
       <textarea
         class="ex-input"
@@ -656,7 +617,6 @@
 
       <div class="chaos-divider">💔 · 💔 · 💔 · 💔 · 💔</div>
 
-      <!-- Who sent it -->
       <div class="field-label">🕵️ Who sent this?</div>
       <div class="who-grid" id="whoGrid">
         <button class="who-btn active" data-who="ex boyfriend">
@@ -673,21 +633,17 @@
         </button>
       </div>
 
-      <!-- Translate Button -->
-      <button class="btn-translate" id="translateBtn" onclick="translate()">
+      <button class="btn-translate" id="translateBtn" onclick="runTranslation()">
         <span class="btn-text">💔 TRANSLATE THE BS 💔</span>
         <div class="spinner"><span></span><span></span><span></span></div>
       </button>
 
-      <!-- Output -->
       <div class="output-section" id="outputSection">
         <div class="output-box">
           <div class="original-label">What they said:</div>
           <div class="original-text" id="originalText"></div>
           <div class="arrow-divider">⬇️</div>
           <div class="translation-text" id="translationText"></div>
-
-          <!-- Pain meter -->
           <div class="pain-meter">
             <div class="pain-label">💔 Pain Level</div>
             <div class="pain-bar-wrap">
@@ -695,10 +651,9 @@
             </div>
             <div class="pain-score" id="painScore"></div>
           </div>
-
           <div class="output-actions">
             <button class="btn-share" onclick="copyResult()">📸 Copy & Share</button>
-            <button class="btn-again" onclick="translate()">↺ Retranslate</button>
+            <button class="btn-again" onclick="runTranslation()">↺ Retranslate</button>
           </div>
         </div>
       </div>
@@ -706,13 +661,11 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <span>ExTranslator AI</span> © 2025 &nbsp;·&nbsp; No feelings were spared in making this tool &nbsp;·&nbsp; 💔
   </footer>
 
   <script>
-    // ── Floating emojis
     const emojiList = ['💔','😭','🚩','👻','📵','🤡','😤','💀','🙄','😮‍💨'];
     const container = document.getElementById('bgEmojis');
     for (let i = 0; i < 20; i++) {
@@ -726,7 +679,6 @@
       container.appendChild(el);
     }
 
-    // ── Who selector
     document.querySelectorAll('.who-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.who-btn').forEach(b => b.classList.remove('active'));
@@ -734,13 +686,10 @@
       });
     });
 
-    // ── Char counter
     function updateChar() {
-      const len = document.getElementById('exInput').value.length;
-      document.getElementById('charCount').textContent = len;
+      document.getElementById('charCount').textContent = document.getElementById('exInput').value.length;
     }
 
-    // ── Copy result
     function copyResult() {
       const original    = document.getElementById('originalText').textContent;
       const translation = document.getElementById('translationText').textContent;
@@ -753,8 +702,7 @@
       });
     }
 
-    // ── Translate using Netlify function
-    async function translate() {
+    async function runTranslation() {
       const input = document.getElementById('exInput').value.trim();
       if (!input) {
         const ta = document.getElementById('exInput');
@@ -766,7 +714,6 @@
       }
 
       const who = document.querySelector('.who-btn.active').dataset.who;
-
       const btn = document.getElementById('translateBtn');
       btn.classList.add('loading');
       btn.disabled = true;
@@ -781,12 +728,10 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Something went wrong');
 
-        // Show output
         document.getElementById('originalText').textContent = input;
         document.getElementById('translationText').textContent = data.translation;
         document.getElementById('outputSection').classList.add('visible');
 
-        // Animate pain bar
         const pain = Math.min(100, Math.max(20, data.painLevel || 70));
         setTimeout(() => {
           document.getElementById('painBar').style.width = pain + '%';
@@ -797,11 +742,8 @@
                          `${pain}/100 — Could've been worse honestly 🤷`;
         }, 300);
 
-        // Update counter
         const counter = document.getElementById('translationCount');
-        const current = parseInt(counter.textContent.replace(',', ''));
-        counter.textContent = (current + 1).toLocaleString();
-
+        counter.textContent = (parseInt(counter.textContent.replace(',','')) + 1).toLocaleString();
         document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       } catch (err) {
