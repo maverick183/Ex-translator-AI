@@ -1,9 +1,35 @@
 exports.handler = async function (event) {
+
+  // ✅ Handle CORS preflight
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      },
+      body: ""
+    };
+  }
+
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  const { message, who } = JSON.parse(event.body);
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json"
+  };
+
+  let message, who;
+  try {
+    const body = JSON.parse(event.body);
+    message = body.message;
+    who     = body.who;
+  } catch (e) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid request body" }) };
+  }
 
   const prompt = `You are ExTranslator AI — a brutally honest, funny translator that decodes what people REALLY mean in breakup/rejection messages.
 
@@ -12,14 +38,10 @@ Someone received this message from their ${who}:
 
 Your job:
 1. Write a BRUTALLY HONEST translation of what they really meant (2-4 sentences). Be savage but funny — like a best friend who tells the truth. Use casual language. Add relevant emojis. Make it relatable and shareable.
-
 2. Give a pain level score from 0-100 (how brutal this message actually was).
 
-Respond in this exact JSON format only, nothing else:
-{
-  "translation": "your brutal honest translation here",
-  "painLevel": 75
-}`;
+Respond in this exact JSON format only, nothing else, no markdown, no backticks:
+{"translation":"your brutal honest translation here","painLevel":75}`;
 
   try {
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -35,7 +57,7 @@ Respond in this exact JSON format only, nothing else:
         messages: [
           {
             role: "system",
-            content: "You are a brutally honest, savage but funny translator. Always respond with valid JSON only. No markdown, no backticks, just raw JSON."
+            content: "You are a brutally honest, savage but funny translator. Always respond with valid JSON only. No markdown, no backticks, just raw JSON like: {\"translation\":\"...\",\"painLevel\":75}"
           },
           { role: "user", content: prompt }
         ]
@@ -48,31 +70,31 @@ Respond in this exact JSON format only, nothing else:
       throw new Error(data.error?.message || "Groq API error");
     }
 
-    const raw = data.choices?.[0]?.message?.content || '{}';
+    let raw = data.choices?.[0]?.message?.content || '{}';
+
+    // Strip any markdown backticks if model adds them
+    raw = raw.replace(/```json|```/g, '').trim();
 
     let parsed;
     try {
       parsed = JSON.parse(raw);
     } catch {
-      // If JSON parse fails, return the raw text as translation
-      parsed = {
-        translation: raw,
-        painLevel: 70
-      };
+      parsed = { translation: raw, painLevel: 70 };
     }
 
     return {
       statusCode: 200,
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({
-        translation: parsed.translation || "They basically said goodbye without the courage to say it properly. Classic. 💀",
-        painLevel: parsed.painLevel || 70
+        translation: parsed.translation || "They basically ghosted you with extra steps. You deserve better. 💀",
+        painLevel:   typeof parsed.painLevel === 'number' ? parsed.painLevel : 70
       })
     };
 
   } catch (err) {
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: err.message })
     };
   }
